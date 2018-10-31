@@ -9,3 +9,6 @@ msgfold.data: message_stat.csv
 
 rss.data: maild_stat.csv
 	sh -c "tail -n+2 maild_stat.csv | cut -d';' -f1,4 | tr ';' ' ' >rss.data"
+
+sessions.data:
+	tail -n+2 message_stat.csv | cut -d';' -f1,2 | sed 's/\([^;]\);\(.*\)\+/\1 1\n\2 -1/' | sort -n | awk '{ sum += $$2; printf "%f %d\n", $$1, sum }' >sessions.data
