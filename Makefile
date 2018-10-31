@@ -12,3 +12,9 @@ rss.data: maild_stat.csv
 
 sessions.data:
 	tail -n+2 message_stat.csv | cut -d';' -f1,2 | sed 's/\([^;]\);\(.*\)\+/\1 1\n\2 -1/' | sort -n | awk '{ sum += $$2; printf "%f %d\n", $$1, sum }' >sessions.data
+
+latency.data:
+	tail -n+2 message_stat.csv | cut -d';' -f1,2 | tr ';' ' ' | awk '{ printf "%f %f\n", $$1, $$2 - $$1 }' >latency.data
+
+utime.data:
+	tail -n+2 maild_stat.csv | cut -d';' -f1,5 | tr ';' ' ' | awk '{ printf "%f %f\n", $$1, $$2 / 100 }' >utime.data
