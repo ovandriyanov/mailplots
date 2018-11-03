@@ -36,7 +36,7 @@ class Max:
 
 class Sum:
     def __init__(self):
-        self.default = 0
+        self.default = 0.
         self._sum = self.default
 
     def value(self, val):
@@ -51,11 +51,10 @@ folder = Sum() if args.foldtype == 'sum' else Max()
 first_line = sys.stdin.readline()
 interval_start = float(first_line.split()[0])
 
-for line in itertools.chain([first_line], sys.stdin, ['%f %d' % (sys.maxsize, folder.default)]):
+for line in itertools.chain([first_line], sys.stdin):
     time, val = line.split()
-    time, val = float(time), int(val)
-    if time - interval_start > args.width:
-        print('%f %d' % (interval_start, folder.flush()))
+    time, val = float(time), float(val)
+    while time - interval_start >= args.width:
+        print('%f %f' % (interval_start, folder.flush()))
         interval_start += args.width
-        continue
     folder.value(val)
