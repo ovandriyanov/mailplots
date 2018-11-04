@@ -21,3 +21,12 @@ latencyfold.data:
 
 utimefold.data:
 	tail -n+2 maild_stat.csv | cut -d';' -f1,5 | tr ';' ' ' | ./fold.py --width 600 --foldtype sum >utimefold.data
+
+msgsizefold.data:
+	tail -n+2 message_stat.csv | cut -d';' -f1,6 | tr ';' ' ' | ./fold.py --width 86400 --foldtype sum >msgsizefold.data
+
+textsizefold.data:
+	tail -n+2 message_stat.csv | cut -d';' -f1,8 | tr ';' ' ' | ./fold.py --width 86400 --foldtype sum >textsizefold.data
+
+nontextsizefold.data:
+	tail -n+2 message_stat.csv | cut -d';' -f1,10 | tr ';' ' ' | ./fold.py --width 86400 --foldtype sum >nontextsizefold.data
