@@ -19,5 +19,5 @@ latency.data:
 latencyfold.data:
 	tail -n+2 message_stat.csv | cut -d';' -f1,2 | tr ';' ' ' |  awk '{ printf "%f %f\n", $$1, $$2 - $$1 }' | ./fold.py --width 600 --foldtype max >latencyfold.data
 
-utime.data:
-	tail -n+2 maild_stat.csv | cut -d';' -f1,5 | tr ';' ' ' | ./fold.py --width 600 --foldtype sum >utime.data
+utimefold.data:
+	tail -n+2 maild_stat.csv | cut -d';' -f1,5 | tr ';' ' ' | ./fold.py --width 600 --foldtype sum >utimefold.data
