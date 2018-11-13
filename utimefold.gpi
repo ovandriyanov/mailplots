@@ -1,4 +1,4 @@
 set xdata time
 set timefmt "%s"
-set format x "%H:%M"
-plot 'utime.data' using ($1 + 3 * 3600):2 with lines
+set format x "%H:%M %a"
+plot 'utimefold.data' using ($1 + 3 * 3600):2 with lines
